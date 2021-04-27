@@ -1,0 +1,22 @@
+.home-page-nav {
+    background-image: url("common/images/main-page.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 720px;
+
+    .main-navbar{
+        background-color: rgba(202, 240, 248, 0.35);
+
+        svg {
+            fill: $nav-item-color;
+            width: 81.25px;
+            height: 65px;
+            stroke: 100%;
+        }
+
+        .nav-item {
+            color: $nav-item-color
+        }
+    }
+}
