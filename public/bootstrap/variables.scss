@@ -3,4 +3,11 @@ $background-color: #F7FBFD;
 $wrapper-bg: #FFF;
 
 //navigation menu
-$nav-item-color: #073B4C
+$nav-item-color: #073B4C;
+$nav-item-color-hover: white;
+
+$animate-underline: all 0.2s ease-in-out;
+
+$duration-underline: .2s;
+$distance-underline: 8px;
+$easeOutBack: cubic-bezier(0.175, 0.885, 0.320, 1.275);

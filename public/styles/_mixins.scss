@@ -1,0 +1,49 @@
+@mixin badge-mixin {
+    .badge-info{
+        font-size: 1rem;
+        margin: 0 auto;
+        border-radius: 20px;
+        color: #3D63EB;
+        background: #F2F4FA;
+        text-transform: uppercase;
+        padding: 0.4rem 1rem;
+    }
+}
+
+@mixin underline-element-mixin {
+    cursor: pointer;
+    
+    &:before,
+    &:after {
+        content: '';
+        position: absolute;
+        bottom: 2px;
+        left: 0; right: 0;
+        height: 2px;
+        background-color: black;
+    }
+    &:before {
+        opacity: 0;
+        transform: translateY(- $distance-underline);
+        transition: transform 0s $easeOutBack, opacity 0s;
+    }
+    &:after {
+        opacity: 0;
+        transform: translateY($distance-underline/2);
+        transition: transform $duration-underline $easeOutBack, opacity $duration-underline;
+    }
+    &:hover,
+     &:focus {
+        &:before,
+        &:after {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        &:before {
+            transition: transform $duration-underline $easeOutBack, opacity $duration-underline;
+        }
+        &:after {
+            transition: transform 0s $duration-underline $easeOutBack, opacity 0s $duration-underline;
+        }
+  }
+}

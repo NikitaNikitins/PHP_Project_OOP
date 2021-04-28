@@ -1,0 +1,47 @@
+.home-page-info{
+
+    .services-info, .created-projects-info{
+        margin-top: 5rem;
+
+        @include badge-mixin;
+
+        .info-container{
+            a{
+                text-decoration: none;
+                padding-bottom: 8px;
+                position: relative;
+                color: #000000;
+                font-weight: $font-weight-bold;
+                margin-top: 1rem;
+                
+                @include underline-element-mixin;
+            }
+        }
+
+        h4{
+            margin: 1rem 0;
+            font-size: 1.2rem;
+            font-weight: $font-weight-bold;
+        }
+
+        .observe-services-button{
+            background-color: $nav-item-color;
+            border: 0.5px solid $nav-item-color;
+            border-radius: 0.3rem;
+            padding: 0.4rem 1rem;
+            color: white;
+            transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+
+            &:hover{
+                background-color: white;
+                color: $nav-item-color;
+            }
+        }
+    }
+
+    .block-divider{
+        margin: 5rem auto;
+        background-color: rgba($color: #000000, $alpha: 0.6);
+        height: 1px;
+    }
+}

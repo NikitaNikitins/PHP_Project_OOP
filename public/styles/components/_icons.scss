@@ -1,0 +1,15 @@
+@import "~bootstrap/variables.scss";
+
+.icon {
+    &.icon-info{
+        fill: $nav-item-color;
+        height: 2.5rem;
+        width: 2.5rem;
+    }
+
+    &.icon-project-info{
+        fill: #1d1313;
+        width: 1.2rem;
+        height: 1.2rem;
+    }
+}
