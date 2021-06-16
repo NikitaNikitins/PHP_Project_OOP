@@ -1,39 +1,40 @@
 <?php
+   header ("Access-Control-Allow-Origin: *");
+   header ("Access-Control-Expose-Headers: Content-Length, X-JSON");
+   header ("Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS");
+   header ("Access-Control-Allow-Headers: *");
 
-ob_start(); // turn on output buffering
+   include_once 'common/helpers.php';
+   include_once 'common/FileSystemHelper.php';
+   include_once 'processer/Authentication/UserInterface.php';
 
-  // session_start(); // turn on sessions if needed
+   include_once 'processer/Authentication/Core/PasswordTrait.php';
+   include_once 'processer/Authentication/Token/UserTokenInterface.php';
+   include_once 'processer/Authentication/Token/UserToken.php';
 
-  // Assign file paths to PHP constants
-  // __FILE__ returns the current path to this file
-  // dirname() returns the path to the parent directory
+   include_once 'processer/Authentication/Core/UserManagerInterface.php';
+   include_once 'processer/Authentication/Core/UserManager.php';
 
- define("PRIVATE_PATH", dirname(__FILE__)); //..\private
- define("PROJECT_PATH", dirname(PRIVATE_PATH)); //.. 
- define("PUBLIC_PATH", PROJECT_PATH . '/public');
- define("SHARED_PATH", PRIVATE_PATH . '/shared');
- 
+   //Models
+   include_once 'models/OrderedProject.php';
+   include_once 'models/Address.php';
+   include_once 'models/User.php';
+   include_once 'models/UserRole.php';
 
- $public_end = strpos($_SERVER['SCRIPT_NAME'], '/public') + 7;
- $doc_root = substr($_SERVER['SCRIPT_NAME'], 0, $public_end);
- define("WWW_ROOT", $doc_root);
- 
- require_once('functions.php');
+   //Get data from request
+   $data = \Helpers\getRequestData();
+   $router = $data['router'];
 
+   //Validating route
+      if (\Helpers\isValidRouter($router)) {
 
- //Loading all the existing classes
+         // Connecting file router
+         include_once "routers/$router.php";
 
- //Findind all the present files in class dir
-//  foreach(glob('classes/*.class.php')as $file) {
-//      require_once($file);
-//  }
+         // Executing main function
+         getRoute($data);
 
-//adherence to sequence
-   require_once('DbConnector.php');
-   require_once('models/User.php');
-   require_once('models/Worker.php');
-   require_once('models/Customer.php');
-   require_once('models/Billing.php');
-   require_once('models/OrderedProject.php');
-   require_once('models/ProjectInProgress.php');
-?>
+   } else {
+         // Выбрасываем ошибку
+         \Helpers\throwHttpError('invalid_router', 'router not found');
+   }

@@ -1,5 +1,6 @@
 $basic-title-color: #354168;
-$background-color: #F7FBFD;
+$card-title-color: #0b1124;
+$background-color: #ffffff;
 $wrapper-bg: #FFF;
 
 //navigation menu
@@ -11,3 +12,22 @@ $animate-underline: all 0.2s ease-in-out;
 $duration-underline: .2s;
 $distance-underline: 8px;
 $easeOutBack: cubic-bezier(0.175, 0.885, 0.320, 1.275);
+
+//Toasts
+$toasts-content-bg-color: #FFFFFF;
+$toasts-content-text-color: #555555;
+$toasts-success-border-color: #2DD29B;
+$toasts-success-icon-color: #24A87C;
+$toasts-success-bg-color: #EFFBF7;
+$toasts-error-border-color: #FF9999;
+$toasts-error-icon-color: #F87777;
+$toasts-error-bg-color: #FFF5F5;
+$toasts-info-border-color: #6EB3F7;
+$toasts-info-icon-color: #3D99F5;
+$toasts-info-bg-color: #F5F9FF;
+$toasts-close-action-color: #CFDFF7;
+$toasts-close-action-hover-bg-color: #F7FBFD;
+$toasts-type-text-color: $basic-title-color;
+$toasts-icon-padding: 1.5rem;
+$toasts-icon-font-size: 2em;
+$toasts-icon-margin: 0.05rem;

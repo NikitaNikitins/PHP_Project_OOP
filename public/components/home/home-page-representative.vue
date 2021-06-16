@@ -1,5 +1,6 @@
 <template>
-    <div class="home-page-repr">
+    <div class="home-page-nav">
+        <div class="home-page-repr">
         <div class="content">
             <h1>Company moto test test test</h1>
             <p>asdasasdasdasdasdasdasd</p>
@@ -8,6 +9,7 @@
             </div>
         </div>
         <div class="transparent-block"></div>
+    </div>
     </div>
 </template>
 

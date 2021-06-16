@@ -1,50 +1,66 @@
 <template>
-    <div>
-        <div>
-            <h1>Please sign in</h1>
+    <div class="login-wrapper">
+        <div class="card-header">
+            <h1 class="card-title">Sign In</h1>
         </div>
-        <div class="card">
+        <div class="card card-login">
             <div class="card-body">
                 <b-form @submit.prevent="submit">
-                    <v-form-group :validator="$v.username" label="Username">
-                        <b-form-input v-model="username" placeholder="Enter username" />
-                    </v-form-group>
-                    <v-form-group :validator="$v.password" label="Username">
-                        <b-form-input type="password" v-model="password" placeholder="Enter Pasword" />
-                    </v-form-group>
+                    <b-form-group :validator="$v.data.username" label="Username">
+                        <b-form-input v-model="data.username" placeholder="Enter username" />
+                    </b-form-group>
+                    <b-form-group :validator="$v.data.password" label="Password">
+                        <b-form-input type="password" v-model="data.password" placeholder="Enter Pasword" />
+                    </b-form-group>
                     <div class="form-group">
                         <b-btn type="submit" class="btn btn-signin">Sign in</b-btn>
                     </div>
                 </b-form>
-            </div>
+            </div> 
         </div>
     </div>
 </template>
 
 <script>
+    import authService from 'api-services/auth-service';
+
     import { required } from 'vuelidate/lib/validators';
+    import formMixin from 'mixins/form-mixin';
 
     export default {
+        mixins: [formMixin],
+
         data() {
             return {
-                username: '',
-                password: '',
+                data: {
+                    username: '',
+                    password: '',
+                }
             }
         },
 
         validations: {
-            username: {
-                required
-            },
-            password: {
-                required
+            data :{
+                    username: {
+                    required
+                },
+                password: {
+                    required
+                }
             }
         },
 
+        // created() {
+        //     this.$emit('hideNavigationBar', true);
+        // },
+
+        // destroyed() {
+        //     this.$emit('hideNavigationBar', false);
+        // },
+
         methods: {
-            onSubmit() {
-                console.log(this.password);
-                console.log(this.username);
+            async submit() {
+                await authService.login(this.data);
             }
         }
     }

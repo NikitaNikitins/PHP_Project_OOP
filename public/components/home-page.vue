@@ -1,13 +1,27 @@
 <template>
     <div>
-        trrrr
+        <div class="home-page-nav">
+            <home-page-representative/>
+        </div>
+        <div class="home-page-info container">
+            <home-page />
+        </div>
     </div>
 </template>
 
 <script>
-    export default {
-    }
-</script>
+import Vue from 'vue';
 
-<style>
-</style>
+import homePageRepresentative from 'components/home/home-page-representative';
+import homePage from 'components/home/home-page'
+
+Vue.component('home-page-representative', homePageRepresentative);
+Vue.component('home-page', homePage);
+
+export default {
+    data() {
+        return {
+        }
+    },
+}
+</script>

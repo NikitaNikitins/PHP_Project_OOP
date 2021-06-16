@@ -1,9 +1,9 @@
 <template>
-    <div>
+    <div class="container">
         <services-info />
-        <div class="block-divider container"></div>
+        <div class="block-divider"></div>
         <created-projects />
-        <div class="block-divider container"></div>
+        <div class="block-divider"></div>
     </div>
 </template>
 

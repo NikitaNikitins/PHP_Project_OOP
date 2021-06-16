@@ -1,0 +1,18 @@
+.form-group {
+    &.is-invalid {
+        .form-control,
+        .input-group-append,
+        .custom-file-label {
+            border-color: #F8CDCE !important;
+            box-shadow: 0 0 0 .125rem #F8CDCE;
+
+            & ~ &:focus, &:active {
+                box-shadow: 0 0 0 .125rem darken(#F8CDCE, 5%);
+            }
+        }
+
+        .invalid-feedback {
+            display: block;
+        }
+    }
+}

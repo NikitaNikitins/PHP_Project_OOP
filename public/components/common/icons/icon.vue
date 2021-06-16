@@ -11,6 +11,10 @@
     import clockIcon from 'components/svg/clock.svg';
     import groupIcon from 'components/svg/group.svg';
     import locationIcon from 'components/svg/placeholder.svg';
+    import saveIcon from 'components/svg/save.svg';
+    import editIcon from 'components/svg/edit.svg';
+    import previewIcon from 'components/svg/preview.svg';
+    import deleteIcon from 'components/svg/delete.svg';
 
     const iconTypes = {
         'main-logo': { component: companyLogo, class: 'icon-main-logo' },
@@ -20,7 +24,11 @@
         'team-icon': { component: teamIcon, class: 'icon-info' },
         'clock-icon': { component: clockIcon, class: 'icon-project-info' },
         'group-icon': { component: groupIcon, class: 'icon-project-info' },
-        'location-icon': { component: locationIcon, class: 'icon-project-info' }
+        'location-icon': { component: locationIcon, class: 'icon-project-info' },
+        'save-icon' : { component: saveIcon, class: 'icon-action' },
+        'edit-icon': { component: editIcon, class: 'icon-action' },
+        'preview-icon': { component: previewIcon, class: 'icon-action' },
+        'delete-icon': { component: deleteIcon, class: 'icon-action' }
     };
 
     const components = {};
