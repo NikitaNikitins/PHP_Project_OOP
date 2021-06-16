@@ -1,4 +1,51 @@
+.main-navbar{
+    z-index: 1;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.116);
+    box-shadow:0 0 10px;
+    position: -webkit-sticky;
+    position: sticky;
+    background-color: rgba(202, 240, 248, 0.35);
+    top: 0;
+
+    svg {
+        fill: $nav-item-color;
+        width: 81.25px;
+        height: 65px;
+        stroke: 100%;
+    }
+
+    .navbar-nav{
+        .nav-link {
+            display: inline-block;
+            text-align: center;
+            vertical-align: middle;
+            color: $nav-item-color;
+            margin-right: 1.6rem;
+            font-weight: $font-weight-black;
+            border: 0.5px solid $nav-item-color;
+            border-radius: 0.6rem;
+            transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+
+            &:hover{
+                background-color: $nav-item-color;
+                color: white;
+
+                svg{
+                    fill: white;
+                }
+            }
+
+            svg{
+                width: 14px;
+                height: 14px;
+            }
+        }
+    }
+}
+
+
 .home-page-nav {
+    margin-top: -6.25rem;
     z-index: -1;
     background-image: url("common/images/main-page.png");
     background-repeat: no-repeat;
@@ -6,51 +53,6 @@
     background-size: cover;
     width: 100%;
     height: 1080px;
-
-    .main-navbar{
-        z-index: 1;
-        border-bottom: 1px solid rgba(0,0,0,.03);
-        box-shadow:0 0 10px;
-        position: -webkit-sticky;
-        position: sticky;
-        background-color: rgba(202, 240, 248, 0.35);
-        top: 0;
-
-        svg {
-            fill: $nav-item-color;
-            width: 81.25px;
-            height: 65px;
-            stroke: 100%;
-        }
-
-        .navbar-nav{
-            .nav-link {
-                display: inline-block;
-                text-align: center;
-                vertical-align: middle;
-                color: $nav-item-color;
-                margin-right: 1.6rem;
-                font-weight: $font-weight-black;
-                border: 0.5px solid $nav-item-color;
-                border-radius: 0.6rem;
-                transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-
-                &:hover{
-                    background-color: $nav-item-color;
-                    color: white;
-
-                    svg{
-                        fill: white;
-                    }
-                }
-
-                svg{
-                    width: 14px;
-                    height: 14px;
-                }
-            }
-        }
-    }
 
     .home-page-repr{
         padding: 3rem;

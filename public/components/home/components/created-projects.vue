@@ -6,28 +6,46 @@
                 <h2 class="font-weight-bold">
                     Created Projects by our team
                 </h2>
-                <a class="mt-2 animated-underline">
-                    See our other created projects >
-                </a>
+                <router-link to="/completedProjects" class="nav-link mt-2 animated-underline">See our other created projects ></router-link>
             </div>
         </div>
         <div class="row justify-content-between mt-5">
-            <div class="col-5">
-                <created-project-item :imgSrc="'./components/common/images/project1.png'"/>
-            </div>
-            <div class="col-5">
-                <created-project-item :imgSrc="'./components/common/images/project2.png'"/>
+            <div class="col"  v-for="project in projects" :key="project.City">
+                <created-project-item :data="project"/>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-    import createdProjectItem from './created-project-item';
+    import createdProjectItem from '../../common/components/created-project-item';
 
     export default {
+        data() {
+            return {
+                projects: [
+                    {
+                        MainImage: require('components/common/images/project-1.png'),
+                        ProjectTitle: "Example title",
+                        TimeSpent: 9,
+                        EmployedCount: 4,
+                        City: 'The Hague',
+                        ProjectDescription: 'Simple Dimple'
+                    },
+                    {
+                        MainImage: require('components/common/images/project-2.png'),
+                        Title: "Example title",
+                        TimeSpent: 9,
+                        EmployedCount: 4,
+                        City: 'Rotterdam',
+                        Text: 'Simple Dimple'
+                    }
+                ]
+            }
+        },
+
         components: {
-            createdProjectItem
+            createdProjectItem,
         }
     }
 </script>
