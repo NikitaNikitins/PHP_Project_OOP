@@ -1,6 +1,6 @@
 <template>
     <div class="main-navbar" :class="{sticked_navbar_color: scrollPosition > 50 }">
-        <b-navbar toggleable="lg" class="container">
+        <b-navbar toggleable="lg">
             <b-navbar-brand href="#" class="ml-5">
                 <icon type="main-logo"></icon>
             </b-navbar-brand>
@@ -9,8 +9,14 @@
                 <b-navbar-nav class="ml-auto mr-4">
                     <router-link to="/" class="nav-link font-weight-bold">Home</router-link>
                     <router-link to="/completedProjects" class="nav-link font-weight-bold">Completed Projects</router-link>
-                    <router-link to="/services" class="nav-link font-weight-bold">Services</router-link>
-                    <b-nav-item href="#">Contact Us</b-nav-item>
+
+                    <router-link to="/create-database-sql" class="nav-link font-weight-bold">Datubāzes izveidošanas skripts</router-link>
+                    <router-link to="/er-diagram" class="nav-link font-weight-bold">ER diagramma</router-link>
+                    <router-link to="/stored-functions" class="nav-link font-weight-bold">Funkcijas</router-link>
+                    <router-link to="/stored-procedures" class="nav-link font-weight-bold">Procedūras</router-link>
+                    <router-link to="/created-triggers" class="nav-link font-weight-bold">Triggeri</router-link>
+                    <!-- <router-link to="/services" class="nav-link font-weight-bold">Services</router-link>
+                    <b-nav-item href="#">Contact Us</b-nav-item> -->
                     <router-link to="/login" class="nav-link">Login
                         <icon type="login-icon"></icon>
                     </router-link>
@@ -31,7 +37,7 @@ import icon from './common/icons/icon.vue'
                 scrollPosition: null
             }
         },
-        
+
         components: { icon },
 
         mounted() {

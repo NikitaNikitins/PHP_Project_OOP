@@ -72,6 +72,7 @@
     "vue-axios": "^2.0.2",
     "vue-cleave-component": "^2.1.3",
     "vue-gallery-slideshow": "^1.5.2",
+    "vue-loading-button": "^0.2.0",
     "vue-multiselect": "^2.1.6",
     "vue-progressbar": "^0.7.3",
     "vue-router": "^3.3.4",

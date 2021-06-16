@@ -6,7 +6,7 @@ const orderedProjectsService = {
     },
 
     async getOrderedProjectById(id){
-        return (await Vue.axios.get('/orderedProjects', {params: {id}})).data; 
+        return (await Vue.axios.get('/orderedProjects', {params: {id}})).data;
     },
 
     async getFinishedProjects() {
@@ -23,7 +23,11 @@ const orderedProjectsService = {
 
     async createNewFinishedProject(data) {
         return (await Vue.axios.post('/orderedProjects/createNewFinishedProject', data)).message;
-    }
+    },
+
+    async deleteProject(id) {
+        return (await Vue.axios.delete("/orderedProjects/"+id )).message;
+    },
 }
 
 export default orderedProjectsService;

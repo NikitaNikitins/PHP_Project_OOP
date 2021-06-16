@@ -11,7 +11,7 @@
         </div>
         <div class="row justify-content-between mt-5">
             <div class="col"  v-for="project in projects" :key="project.City">
-                <created-project-item :data="project"/>
+                <created-project-item :data="project" :isEditable="false"/>
             </div>
         </div>
     </div>

@@ -21,22 +21,21 @@ class OrderedProjectController {
             //$targetImageUploadDir = $src =FileSystemWorker\FileSystemHelper::getCompletedProjectImagesFolder().DIRECTORY_SEPARATOR.'23'. DIRECTORY_SEPARATOR;
 
             $pdo = \Helpers\connectToDB();
-            $stmt = $pdo->prepare("
-            BEGIN;
-            INSERT INTO orderedprojects(StartDate, FinishDate, Address, City) VALUES(:startDate, :FinishDate, :Address, :City);
-            INSERT INTO projectsinprogress(ProjectId, EmployedCount, ProjectDescription, ProjectTitle, Status)
-                VALUES(LAST_INSERT_ID(), :employedCount, :projectDescription, :projectTitle, :status);
-            COMMIT;");
 
-            $stmt->bindParam(':startDate',$projectData['startDate'], PDO::PARAM_STR);
+            $mainImage = $projectData['projectImages'][0];
+            $stmt = $pdo->prepare("
+            CALL create_new_finished_project(:Address, :City, :text, :FinishDate, :StartDate, :Title, :employedCount, :moneySpent, :mainImage )");
+
+            $stmt->bindParam(':StartDate',$projectData['startDate'], PDO::PARAM_STR);
             $stmt->bindParam(':FinishDate',$projectData['finishDate'], PDO::PARAM_STR);
             $stmt->bindParam(':Address',$projectData['address'], PDO::PARAM_STR);
             $stmt->bindParam(':City',$projectData['city'], PDO::PARAM_STR);
 
             $stmt->bindParam(':employedCount',$projectData['employedCount'], PDO::PARAM_INT);
-            $stmt->bindParam(':projectDescription',$projectData['description'], PDO::PARAM_STR);
-            $stmt->bindParam(':projectTitle',$projectData['title'], PDO::PARAM_STR);
-            $stmt->bindParam(':status',$this->FINISHED_PROJECT_VAL, PDO::PARAM_INT);
+            $stmt->bindParam(':moneySpent',$projectData['moneySpent']);
+            $stmt->bindParam(':text',$projectData['text'], PDO::PARAM_STR);
+            $stmt->bindParam(':Title',$projectData['title'], PDO::PARAM_STR);
+            $stmt->bindParam(':mainImage',$mainImage, PDO::PARAM_STR);
 
             try {
                 $stmt->execute();
@@ -54,19 +53,6 @@ class OrderedProjectController {
             exit;
         }
 
-        // // GET /projects all
-        // if ($data['method'] === 'GET' && count($data['urlData']) === 1) {
-        //     echo json_encode($this->getOrderedProjects());
-        //     exit;
-        // }
-
-        // // GET /projects/:$id
-        // if ($data['method'] === 'GET' && count($data['urlData']) === 2) {
-        //     $id = (int)$data['urlData'][1];
-        //     echo json_encode($this->getOrderedProject($id));
-        //     exit;
-        // }
-
         // GET /orderedProjects/finishProject/:$id
         if ($data['method'] === 'GET' && $data['urlData'][1] === 'finishProject' &&  count($data['urlData']) === 3) {
             $id = (int)$data['urlData'][2];
@@ -74,54 +60,25 @@ class OrderedProjectController {
             exit;
         }
 
-        // // POST /projects
-        // if ($data['method'] === 'POST'
-        //     && count($data['urlData']) === 1
-        //     && isset($data['formData']['orderedProjectCustomerId'])
-        //     && isset($data['formData']['startDate'])
-        //     && isset($data['formData']['plannedEndDate'])
-        //     && isset($data['formData']['adress'])
-        //     && isset($data['formData']['city'])) {
+        //delete orderedproject
+        // DELETE /orderedProjects/5
+        if ($data['method'] === 'DELETE' && count($data['urlData']) === 2) {
+            $id = (int)$data['urlData'][1];
+            $pdo = \Helpers\connectToDB();
 
-        //         $this->OrderedProjectCustomerId= $data['formData']['startDate'];
-        //         $this->StartDate = $data['formData']['plannedEndDate'];
-        //         $this->PlannedEndDate = $data['formData']['orderedProjectCustomerId'];
-        //         $this->Address = $data['formData']['adress'];
-        //         $this->City = $data['formData']['city'];
+            $stmt = 'DELETE FROM unitedconstuctiongroup.orderedprojects WHERE Id =:id';
 
-        //     echo json_encode($this->addProject());
-        //     exit;
-        // }
-
-        // // PUT /projects/5
-        // if ($data['method'] === 'PUT'
-        //     && count($data['urlData']) === 1
-        //     && isset($data['formData']['orderedProjectCustomerId'])
-        //     && isset($data['formData']['startDate'])
-        //     && isset($data['formData']['plannedEndDate'])
-        //     && isset($data['formData']['adress'])
-        //     && isset($data['formData']['city'])) {
-
-        //         $this->OrderedProjectCustomerId= $data['formData']['startDate'];
-        //         $this->StartDate = $data['formData']['plannedEndDate'];
-        //         $this->PlannedEndDate = $data['formData']['orderedProjectCustomerId'];
-        //         $this->Address = $data['formData']['adress'];
-        //         $this->City = $data['formData']['city'];
-
-        //     echo json_encode($this->updateProject());
-        //     exit;
-        // }
-
-        // // DELETE /projects/5
-        // if ($data['method'] === 'DELETE' && count($data['urlData']) === 2) {
-        //     $id = (int)$data['urlData'][1];
-
-        //     echo json_encode($this->deleteProject($id));
-        //     exit;
-        // }
-
-        // Ja bija nepareizs routers
-        //\Helpers\throwHttpError('invalid_parameters', 'invalid parameters');
+            try{
+                $query = $pdo->prepare($stmt);
+                $query->bindParam(':id',$id, PDO::PARAM_INT);
+                $query->execute();
+                \Helpers\HttpSuccess("Ordered project is deleted!");
+            }
+            catch (PDOException $e) {
+                \Helpers\throwHttpError('project_delete_error', "$e");
+            }
+            exit;
+        }
     }
 
     private function getOrderedProjectsToFinish() {

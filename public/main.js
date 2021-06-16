@@ -21,6 +21,8 @@ import app from 'components/app';
 import icon from 'components/common/icons/icon';
 import svgIcon from 'components/common/icons/svg-icon';
 import vuelidateErrorExtractorTemplate from 'components/common/vuelidate/vuelidate-error-extractor-template';
+import loadingButton from 'components/common/components/loading-button';
+import currencyInput from 'components/common/components/currency-input';
 require("babel-polyfill");
 
 import router from './router';
@@ -45,6 +47,8 @@ Vue.use(VuelidateErrorExtractor, {
 Vue.component('icon', icon);
 Vue.component('svg-icon', svgIcon);
 Vue.component('validation-errors', validationErrors);
+Vue.component('b-btn-loading', loadingButton);
+Vue.component('currency-input',currencyInput);
 
 new Vue({
     el: '#app',
