@@ -3,7 +3,8 @@ export default {
         return {
             closeModalOnSubmit: true,
             wasSubmitted: false,
-            successPayload: null
+            successPayload: null,
+            errors: []
         }
     },
 
@@ -19,13 +20,44 @@ export default {
         },
 
          async submit() {
+            if (this.$v && this.$v.$invalid) {
+                let validatation = this.$v.data;
+
+                for (let key in validatation) {
+                    if (validatation[key].$invalid)
+                        validatation[key].$touch();
+                }
+
+               // return;
+            }
+
             await this.onSubmit();
 
-                this.wasSubmitted = true;
+            if (this.$v && !this.isInputValid(this))
+                return;
 
-                if (this.closeModalOnSubmit) {
-                    this.$refs.modal.hide();
+            this.wasSubmitted = true;
+
+            if (this.closeModalOnSubmit) {
+                this.$refs.modal.hide();
+            }
+        },
+
+        isInputValid(inputRef) {
+            if (this.$v && this.$v.$invalid) {
+                let validatation = this.$v;
+                if (this.$v && this.$v.data)
+                    validatation = this.$v.data
+
+                for (let key in validatation) {
+                    if (validatation[key].$invalid)
+                        validatation[key].$touch();
                 }
+
+                return false;
+            }
+
+            return true;
         },
 
         modalHidden() {

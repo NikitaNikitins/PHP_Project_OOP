@@ -1,14 +1,17 @@
 <template>
-    <div class="completed-projects-wrapper container" v-if="isLoaded">
+    <div class="completed-projects-wrapper container">
         <div class="d-flex flex-row-reverse mt-5 mb-5">
-            <b-btn variant="primary" @click="addProject">Add new completed project</b-btn>
+            <b-btn-loading :variant="'btn btn-primary'" @click.native="addProject"
+            :isLoading="isLoading"
+            :text="'Add new completed project'">
+            </b-btn-loading>
         </div>
         <img :src="mainCardImg" alt="" />
         <article class="mt-3">
             <h1>Lorem ipsum dolor sit.</h1>
             <h4>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti quisquam facilis hic. Architecto repudiandae corrupti rem unde minus nihil facere, aperiam laboriosam dicta explicabo, minima sequi quas! Minima, quam id.</h4>
         </article>
-        <div class="completed-projects-container">
+        <div class="completed-projects-container" v-if="!isLoading">
             <created-project-item :data="project" v-for="project in completedProjects" :key="project.Id"/>
         </div>
         <add-completed-project-modal ref="addCompletedProject" @sucess="completedProjectAdded"></add-completed-project-modal>
@@ -27,7 +30,7 @@ import addCompletedProjectModal from '../common/modal-windows/create-new-complet
             return {
                 mainCardImg: require('components/common/images/created-projects-main.png'),
                 completedProjects: [],
-                isLoaded: false
+                isLoading: true
             }
         },
 
@@ -39,7 +42,7 @@ import addCompletedProjectModal from '../common/modal-windows/create-new-complet
         async mounted() {
             this.completedProjects = await orderedProjectsService.getFinishedProjects();
 
-            this.isLoaded = true;
+            this.isLoading = false;
         },
 
         methods: {

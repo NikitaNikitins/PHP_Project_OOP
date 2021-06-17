@@ -2,7 +2,10 @@
     <div class="container">
         <div class="d-flex flex-row-reverse mt-5 mb-5">
             <router-link to="/userList">
-                <b-btn variant="warning">Go to user list</b-btn>
+                <b-btn-loading :variant="'btn btn-warning'"
+                :isLoading="!isLoaded"
+                :text="'Go to user list'">
+                </b-btn-loading>
             </router-link>
         </div>
         <div class="login-wrapper">
@@ -35,7 +38,7 @@
                             <b-form-input v-model="data.address" placeholder="Enter address" />
                         </v-form-group>
                         <v-form-group label="Select country" label-required>
-                            <b-form-select v-model="data.countryId" :options="countryOptions">
+                            <b-form-select :validator="$v.data.countryId" v-model="data.countryId" :options="countryOptions">
                                 <template #first>
                                     <b-form-select-option :value="null" disabled>Please select country</b-form-select-option>
                                 </template>
@@ -81,7 +84,7 @@
                     phone: '',
                     address: '',
                     city: '',
-                    countryId: null
+                    countryId: null,
                 },
                 userRoles: [],
                 countryOptions: []
@@ -130,10 +133,13 @@
                 },
                 address: {
                     required
+                },
+                userRole: {
+                    required
+                },
+                countryId:{
+                    required
                 }
-            },
-            repeatedPassword: {
-                required
             }
         },
 

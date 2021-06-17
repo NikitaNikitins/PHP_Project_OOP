@@ -36,7 +36,7 @@ class AuthController {
                     ->setLastName($userData['lastName'])
                     ->setPassword($password)
                     // ->setRoles(UserRole::getAdminRole());
-                    ->setRoles($userData['userRole'])
+                    ->setRoles((int)$userData['userRole'])
                     ->setAddress($address);
 
                 try {
