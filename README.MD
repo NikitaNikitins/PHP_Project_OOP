@@ -8,3 +8,6 @@ Pēc lejupielādēšanas mapes saknē, tur , kur atrodas package.json fails
 - Atvērt XAMPP, vai Wampp, vienalga, galvenais ir ieslēgt Apache serveri un MySQL!!!
 - Pēc tam, kad būs lejupielādētās paķetes konsolē, tajā pašā vietā uzsrakstīt **npm run dev** - tas startēt tasku, kas sakopos visas paķetes un izveidos mūsu programmas front-end daļu. Skripts tiek paņemts no faila package.json -> "scripts" -> "dev"
 - Kad tasks visu izdarīs, atvērsies parlūks ar mūsu vietni
+
+**KUR ATRODAS php-> MySQL skripti?**
+Mapē private -> routers
